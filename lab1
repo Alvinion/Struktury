@@ -22,9 +22,9 @@ typy** losuj(int _n){
 	for (short x=0;x<_n;x++)
 	{
 		tab[x]=new typy;
-		tab[x]->liczba=0;
+		tab[x]->liczba=rand();
 		tab[x]->znak=rand();
-		tab[x]->liczba2=rand();
+		tab[x]->liczba2=0;
 	}
 
 	return(tab);
@@ -41,13 +41,23 @@ void kasuj(typy** tab, int _n)
 
 }
 
-void sortuj(){
+void sortuj(typy** tab, int _n){
+
+	for(short a=0;a<_n-1;a++)
+	 for(short b=0;b<_n-1;b++)
+		 if(tab[b+1]<tab[b])
+			 swap(tab[b+1],tab[b]);
+
+	
+}
+
+
+void zlicz(typy** tab, int _n, char znak){
 
 
 
 
 }
-
 
 int _tmain(int argc, _TCHAR* argv[])
 {
