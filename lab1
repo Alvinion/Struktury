@@ -3,7 +3,7 @@
 
 #include "stdafx.h"
 #include <iostream>
-
+#include <cstdlib>
 
 using namespace std;
 
@@ -20,12 +20,12 @@ typy** losuj(int _n){
         
         typy** tab= new typy*[_n];        
 
-        for (short x=0;x<_n;x++)
+        for (short a=0;a<_n;a++)
         {
-                tab[x]=new typy;
-                tab[x]->liczba=rand();
-                tab[x]->znak=rand();
-                tab[x]->liczba2=0;
+                tab[a]=new typy;
+                tab[a]->liczba=rand() % 1000 +1;
+                tab[a]->znak=rand() % 100;
+                tab[a]->liczba2=0;
         }
 
         return(tab);
@@ -57,8 +57,8 @@ int zlicz(typy** tab, int x, char _znak){
 
 	int start=0;
 	int n= x;
-	char znak1 = _znak1;
-
+	char znak1 = _znak;
+	
 	for (short a=0;a<n; a++) {
 		
 		if(tab[a]->znak==znak1) start++;
@@ -99,34 +99,34 @@ int _tmain(int argc, _TCHAR* argv[])
 	typy** test1;
 	test1=losuj(1000);
 	sortuj(test1, 1000);
-	cout << zlicz(test1,1000,'A');
+	cout << zlicz(test1,1000,'A') << endl;
 	kasuj(test1, 1000);
 
 
-	getchar();
+	//getchar();
 	
 
 	typy** test2;
 	test2=losuj(10000);
 	sortuj(test2, 10000);
-	cout << zlicz(test2,10000,'B');
+	cout << zlicz(test2,10000,'B') << endl;
 	kasuj(test2, 10000);
 
 
-	getchar();
+	//getchar();
 
 
 
 	typy** test3;
 	test3=losuj(100000);
 	sortuj(test3, 100000);
-	cout << zlicz(test3,100000,'C');
+	cout << zlicz(test3,100000,'C')<< endl;
 	kasuj(test3, 100000);
 
 
-	getchar();
+	
 
-	return 0;
+	
 }
 
 
