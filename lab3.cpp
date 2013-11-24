@@ -1,9 +1,12 @@
-// 05. BST.cpp : Defines the entry point for the console application.
+// BSTtree.cpp : Defines the entry point for the console application.
 //
 
 #include "stdafx.h"
+#include <iostream>
 #include <ctime>
 #include <cstdlib>
+
+using namespace std;
 
 struct Node
 {
@@ -19,58 +22,49 @@ struct Tree
 	Node *sentinel;
 };
 
-Tree *initialize();
+Tree *start();
 Node *node(Tree *tree, int key, Node *parent);
 int add(Tree *tree, int key);
 void addX(Tree *tree, int x);
 Node *min(Tree *tree, Node *start);
 Node *max(Tree *tree, Node *start);
 Node *find(Tree *tree, int key);
-int remove(Tree *tree, int key);
-int remove2(Tree *tree, int key);
+int removen(Tree *tree, int key);
+int removep(Tree *tree, int key);
 void print(Tree *tree, Node *current);
 
 int _tmain(int argc, _TCHAR *argv[])
 {
-	Tree *tree = initialize();
+	Tree *tree = start();
 
+	
 	add(tree, 50);
-	add(tree, 10);
-	add(tree, 70);
-
-	remove(tree, 50);
-	remove(tree, 70);
-
-	// Drzewo Hyli, ktorym testuje poprawnosc implementacji
-	// (podobno na przyszlosc ma inne/wiecej drzew wymyslic):
-	/*add(tree, 6);
-	add(tree, 1);
-	add(tree, 56);
-	add(tree, 73);
-	add(tree, 16);
-	add(tree, 99);
-	add(tree, 4);
-	add(tree, 0);
-	add(tree, 5);
 	add(tree, 20);
+	add(tree, 70);
+	add(tree, 69);
+	add(tree,71);
+	//add(tree,71);
+	
+	
+	//addX(tree, 3);
 
-	remove2(tree, 99);
-	remove2(tree, 4);
-	remove2(tree, 1);
-	remove2(tree, 6);*/
+	//remove(tree, 70);
+	//remove2(tree, 50);
 
+	
+	
 	print(tree, tree->root);
-
-	printf("\n");
+	cout << endl;	
+	cout << endl <<tree->root->key << endl;
 	system("pause");
 	return 0;
 }
 
-Tree *initialize()
+Tree *start()
 {
 	Tree* tree = new Tree;
 	tree->sentinel = node(tree, 0, NULL);
-
+	
 	tree->root = tree->sentinel;
 	return tree;
 }
@@ -85,11 +79,11 @@ Node *node(Tree *tree, int key, Node *parent)
 	return node;
 }
 
-int add(Tree *tree, int key)
+int add(Tree *tree, int key)		
 {
 	if (tree->root == tree->sentinel)
 	{
-		tree->root = node(tree, key, tree->sentinel);
+		tree->root = node(tree, key, tree->sentinel);		
 		return 0;
 	}
 
@@ -99,9 +93,10 @@ int add(Tree *tree, int key)
 
 	while ( i != tree->sentinel )
 	{
-		if (key == i->key)
-			return 1;
-
+		if (key == i->key){
+			cout << "Element: "<<key<<" juz istnieje"<<endl;
+			return 0;
+		}
 		parent = i;
 		i = key < i->key ? i->left : i->right;
 	}
@@ -115,7 +110,7 @@ int add(Tree *tree, int key)
 	return 0;
 }
 
-void addX(Tree *tree, int x)
+void addX(Tree *tree, int x)		
 {
 	srand((int)time(0));
 
@@ -145,7 +140,7 @@ Node *max(Tree *tree, Node *start)
 	return i;
 }
 
-Node *find(Tree *tree, int key)
+Node *find(Tree *tree, int key) 
 {
 	tree->sentinel->key = key;
 
@@ -157,7 +152,7 @@ Node *find(Tree *tree, int key)
 	return i;
 }
 
-int remove(Tree *tree, int key)
+int removen(Tree *tree, int key)			//usuwanie następnika
 {
 	Node *target = find(tree, key);
 
@@ -244,7 +239,7 @@ int remove(Tree *tree, int key)
 	return 0;
 }
 
-int remove2(Tree *tree, int key)
+int removep(Tree *tree, int key)		// usuwanie poprzednika
 {
 	Node *target = find(tree, key);
 
@@ -331,13 +326,13 @@ int remove2(Tree *tree, int key)
 	return 0;
 }
 
-void print(Tree *tree, Node *current)
+void print(Tree *tree, Node *current)		//wyświetlanie inorder
 {
-	// inorder
+	
  	if (current != tree->sentinel)
 	{
 		print(tree, current->left);
-		printf("%i ", current->key);
+		cout << current->key <<" ";
 		print(tree, current->right);
 	}
 }
