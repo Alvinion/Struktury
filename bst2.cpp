@@ -39,7 +39,8 @@ node::~node(){;}
 
 node::node()
 {
-	parent=left=right=key=NULL;	
+	key=NULL;
+	parent=left=right=NULL;	
 }
 
 node::node(int keyv)
@@ -420,7 +421,7 @@ void tree:: erase(int keyv)
 			else delete a;
 		}
 		else if(a->child()==1)
-			if(a->getparent!=NULL)
+			if(a->getparent()!=NULL)
 			{
 				if(a->getleft()!=NULL)
 				{
